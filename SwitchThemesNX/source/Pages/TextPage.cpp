@@ -53,7 +53,7 @@ void CreditsPage::Render(int X, int Y)
 
 	ImGui::PushFont(font25);
 	ImGui::TextWrapped(
-		"Thanks to:\n"
+		"感谢:\n"
 		"Syroot for BinaryData lib\n"
 		"AboodXD for Bntx editor and sarc lib\n"
 		"shchmue for Lockpick\n"
