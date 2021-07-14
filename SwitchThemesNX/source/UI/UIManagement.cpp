@@ -31,10 +31,9 @@ static bool ImguiInit()
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	io.DisplaySize = ImVec2{ SCR_W, SCR_H};
-	
-	font25 = io.Fonts->AddFontFromFileTTF(ASSET("opensans.ttf"), 30.0f);
-	font30 = io.Fonts->AddFontFromFileTTF(ASSET("opensans.ttf"), 35.0f);
-	font40 = io.Fonts->AddFontFromFileTTF(ASSET("opensans.ttf"), 40.0f);
+	font25 = io.Fonts->AddFontFromFileTTF(ASSET("opensans.ttf"), 30.0f,NULL,io.Fonts->GetGlyphRangesChineseFull());
+	font30 =	font25;
+	font40 =	font25;
 
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 	io.ConfigFlags |= ImGuiConfigFlags_IsTouchScreen;
