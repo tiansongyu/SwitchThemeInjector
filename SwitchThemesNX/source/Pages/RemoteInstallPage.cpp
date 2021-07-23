@@ -153,7 +153,7 @@ void RemoteInstallPage::StartRemoteInstallFixed(RemoteInstall::FixedTypes type)
 			RemoteInstall::BeginType(SelectedProvider(), type);
 		}
 		catch (std::exception& ex) {
-			DialogBlocking("处理请求时出错，请确保您已连接到 Internet 并稍后重试，如果仍然无效，则可能是所选的提供程序不支持此选项。\n\n错误消息：\ n"s + ex.what());
+			DialogBlocking("处理请求时出错，请确保您已连接到 Internet 并稍后重试，如果仍然无效，则可能是所选的提供程序不支持此选项。\n\n错误消息：\n"s + ex.what());
 		}
 	});
 }
