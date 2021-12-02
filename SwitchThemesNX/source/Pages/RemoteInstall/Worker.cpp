@@ -78,7 +78,7 @@ void RemoteInstall::Worker::BaseWorker::Render(int X, int Y)
 	ImGui::PushFont(font30);
 
 	Utils::ImGuiNextFullScreen();
-	ImGui::Begin("RemoteInstallWorker", nullptr, DefaultWinFlags);
+	ImGui::Begin("远程安装功能", nullptr, DefaultWinFlags);
 
     const float BaseY = SCR_H / 2 - ImGui::GetTextLineHeightWithSpacing() / 2;
     ImGui::SetCursorPosY(BaseY);

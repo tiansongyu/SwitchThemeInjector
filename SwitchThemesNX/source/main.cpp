@@ -339,7 +339,7 @@ int main(int argc, char **argv)
 	PlatformAfterInit();
 
 	SetupSysVer();
-	DisplayLoading("Loading system info...");
+	DisplayLoading("加载系统信息...");
 
 	bool ThemesFolderExists = fs::EnsureThemesFolderExists();
 	NcaDumpPage::CheckHomeMenuVer();
@@ -348,8 +348,8 @@ int main(int argc, char **argv)
 	auto PatchErrorMsg = PatchMng::EnsureInstalled();
 	if (!PatchErrorMsg && UseLowMemory) // if patches are fine, check if applet mode
 	{
-		PatchErrorMsg.Title = "Warning";
-		PatchErrorMsg.Content = "You're running in applet mode, when launching homebrew from album they have less memory available.\n\nThis app should work fine but in case you encounter crashes try launching via title takeover by opening a game from the home menu and pressing R at the same time.";
+		PatchErrorMsg.Title = "警告";
+		PatchErrorMsg.Content = "您正在小程序模式下运行，当从相册启动自制软件时，可用内存较少。\n\n此应用程序应该可以正常工作，但如果您遇到崩溃，请尝试通过从主菜单打开游戏并按 R 来启动游戏 同一时间。";
 	}
 
 	if (envHasArgv() && argc > 1)

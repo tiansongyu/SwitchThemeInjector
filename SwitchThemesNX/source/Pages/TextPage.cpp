@@ -34,12 +34,12 @@ void TextPage::Update()
 }
 
 CreditsPage::CreditsPage() :
-	creditsText("NXThemes installer by exelix - " + Version::Name + " - Core Ver." + SwitchThemesCommon::CoreVer +
+	creditsText("exelix 的 NXThemes 安装程序(invoker__qq汉化) - " + Version::Name + " - Core Ver." + SwitchThemesCommon::CoreVer +
 		'\n' + Version::Commit +
 		"\nSource: github.com/exelix11/SwitchThemeInjector"+
 		"\nDonations: ko-fi.com/exelix11\n\n")
 {
-	Name = "Credits";
+	Name = "参与人员";
 }
 
 extern void ShowFirstTimeHelp(bool WelcomeScr); //from main.cpp
@@ -64,7 +64,7 @@ void CreditsPage::Render(int X, int Y)
 		"Everyone from the DearImgui github repo"
 	);
 
-	if (ImGui::Button("Show first startup info"))
+	if (ImGui::Button("显示首次启动信息"))
 		PushFunction([]() {ShowFirstTimeHelp(false); });
 	PAGE_RESET_FOCUS;
 

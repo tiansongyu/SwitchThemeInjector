@@ -14,7 +14,7 @@ class RebootPage : public IPage
 	public:
 		RebootPage()
 		{
-			Name = "Reboot";
+			Name = "重启";
 		}
 		
 		void Render(int X, int Y) 
@@ -23,9 +23,9 @@ class RebootPage : public IPage
 			ImGui::PushFont(font30);
 			ImGui::SetCursorPos({ 5, 10 });
 
-			ImGui::TextUnformatted("Rebooting your console will apply the changes you made.");
-			ImGui::TextWrapped("This is a shortcut to the system's reboot button. If your CFW doesn't provide reboot to payload you will need a way to inject a payload from RCM.");
-			if (ImGui::Button("Reboot"))
+			ImGui::TextUnformatted("重新启动您的控制台将应用您所做的更改。");
+			ImGui::TextWrapped("这是系统重启按钮的快捷方式。 如果您的 CFW 不提供重新启动负载，您将需要一种从 RCM 注入负载的方法。");
+			if (ImGui::Button("重启"))
 			{
 				PlatformReboot();
 			}

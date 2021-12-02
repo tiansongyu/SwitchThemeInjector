@@ -18,7 +18,7 @@ ThemesPage::ThemesPage() : lblPage("")
 	if (UseLowMemory)
 		LimitLoad = 15;
 
-	Name = "Themes";
+	Name = "主题";
 	lblCommands = CommandsTextNormal;
 
 	RefreshThemesList();
@@ -26,7 +26,7 @@ ThemesPage::ThemesPage() : lblPage("")
 
 void ThemesPage::RefreshThemesList()
 {
-	DisplayLoading("Loading themes list...");
+	DisplayLoading("正在加载主题列表...");
 	ClearSelection();
 	SetPage(-1);
 	CursorMemory.clear();
@@ -156,8 +156,8 @@ void ThemesPage::Render(int X, int Y)
 
 	if (DisplayEntries.size() == 0)
 		ImGui::TextWrapped(
-			"There's nothing here, copy your themes in the themes folder on your sd and try again.\n"
-			"If you do have a themes folder in your sd with themes make sure that the name is all lowercase and that you don't have the archive bit issue if you use a mac or sd corruption if you use exfat, you can find more about those on google or ask for support on discord."
+			"这里什么都没有，将您的主题复制到 sd 上的主题文件夹中，然后重试。\n"
+			"如果您的 sd 中有一个带有主题的 themes 文件夹，请确保名称全部为小写，并且如果您使用的是 mac 或 sd 损坏，则您没有存档位问题，如果您使用 exfat，您可以找到有关这些的更多信息 在 google 上或在 discord 上寻求支持。"
 		);
 
 	ImGui::SetCursorPosY(600);
@@ -170,7 +170,7 @@ void ThemesPage::Render(int X, int Y)
 	ImGui::TextUnformatted(lblCommands.c_str());
 
 	{
-		Utils::ImGuiSetupPage("ThemesList", X, Y, DefaultWinFlags & ~ImGuiWindowFlags_NoScrollbar);
+		Utils::ImGuiSetupPage("主题列表", X, Y, DefaultWinFlags & ~ImGuiWindowFlags_NoScrollbar);
 		int setNewMenuIndex = 0;
 		if (ResetScroll || ImGui::GetCurrentWindow()->Appearing)
 		{
@@ -336,7 +336,7 @@ void ThemesPage::Update()
 			ThemeEntry::DisplayInstallDialog(file);
 			if (!ThemeEntry::FromFile(file)->Install(false))
 			{
-				Dialog("Installing a theme failed, the process was cancelled");
+				Dialog("安装主题失败，进程被取消");
 				break;
 			}
 		}

@@ -61,7 +61,7 @@ private:
 		if (FileName == "")
 		{
 			lblFname = "Unknown.szs";
-			lblLine1 = "Remote install";
+			lblLine1 = "远程安装";
 		}
 		else
 		{
@@ -71,8 +71,8 @@ private:
 		auto patch = SwitchThemesCommon::SzsPatcher::DetectSarc(SData);
 		if (patch.FirmName == "")
 		{
-			lblLine2 = "Invalid theme";
-			InstallFailReason = "Invalid theme";
+			lblLine2 = "无效的主题";
+			InstallFailReason = "无效的主题";
 			_CanInstall = false;
 		}
 		else lblLine2 = (patch.TemplateName + " for " + patch.FirmName);

@@ -15,7 +15,7 @@ using namespace SwitchThemesCommon;
 
 void ThemeEntry::DisplayInstallDialog(const std::string& path)
 {
-	DisplayLoading({ "Installing " + path + " ...", "CFW folder: " + fs::path::CfwFolder() });
+	DisplayLoading({ "安装 " + path + " ...", "CFW文件夹: " + fs::path::CfwFolder() });
 }
 
 class DummyEntry : public ThemeEntry 
@@ -44,7 +44,7 @@ bool ThemeEntry::Install(bool ShowDialogs)
 	if (!CanInstall())
 	{
 		// Sometimes ::Install is called automatically eg RemoteInstall/Detail.cpp, it would fail silently if CanInstall() == false
-		DialogBlocking(InstallFailReason == "" ? "This theme can't be installed." : InstallFailReason);
+		DialogBlocking(InstallFailReason == "" ? "无法安装此主题." : InstallFailReason);
 		return false;
 	}
 
@@ -55,12 +55,12 @@ bool ThemeEntry::Install(bool ShowDialogs)
 	}
 	catch (const exception & ex)
 	{
-		DialogBlocking("Error while installing this theme: " + string(ex.what()));
+		DialogBlocking("安装此主题时出错: " + string(ex.what()));
 		return false;
 	}
 
 	if (ShowDialogs)
-		DialogBlocking("Done, restart the console to apply the changes");
+		DialogBlocking("完成，重新启动控制台以应用更改");
 	return true;
 }
 

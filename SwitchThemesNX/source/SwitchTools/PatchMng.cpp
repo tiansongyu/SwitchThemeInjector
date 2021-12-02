@@ -16,30 +16,30 @@ static const u32 PatchSetVer = 9;
 
 #define ThemePatchesDir "NxThemesInstaller/"
 
-#define WarnIntro "Since 9.0 some parts of the home menu require a custom code patch (exefs patch) to run properly.\n"
-#define WarnOutro "\n\nWithout the correct patches you can still install themes but some may crash, you will be warned when installing a theme that's known to cause issues"
+#define WarnIntro "从 9.0 开始，主菜单的某些部分需要自定义代码补丁（exefs 补丁）才能正常运行。\n"
+#define WarnOutro "\n\n如果没有正确的补丁，您仍然可以安装主题，但有些可能会崩溃，当安装已知会导致问题的主题时，您会收到警告"
 
 //Is there even another CFW ?
-const char* WarningCFW = WarnIntro "Unfortunately your CFW doesn't seem to suppot ips patches for titles." WarnOutro;
+const char* WarningCFW = WarnIntro "不幸的是，您的 CFW 似乎不支持标题的 ios 补丁。" WarnOutro;
 
 static const char* WarningSX = WarnIntro
-		"\nIt seems you're using SX OS, support for these patches has been added only in version 2.9.4 beta.\n"
-		"This means that if you're running an older version your CFW is not compatible, you're seeing this warning because this application cannot detect which is your current version.\n"
-		"When installing a lockscreen theme you will be warned about missing patches, if you know for sure that you have a supported version you can safely install the theme.\n\n"
-		"In case you don't have the right version and install the theme anyway your console will crash on boot, the warning before install also displays the instructions to fix it.";
+"\n看来您使用的是 SX 操作系统，仅在 2.9.4 beta 版中添加了对这些补丁的支持。\n"
+"这意味着，如果您运行的是旧版本，您的 CFW 不兼容，您会看到此警告，因为此应用程序无法检测您当前的版本。\n"
+"安装锁屏主题时，您将收到有关缺少补丁的警告，如果您确定拥有受支持的版本，则可以安全地安装该主题。\n\n"
+"如果您没有正确的版本并安装主题，无论如何您的控制台将在启动时崩溃，安装前的警告还会显示修复它的说明。";
 
 static const char* WarningMissingPatch = WarnIntro
-	 "You're running a firmware version that is not supported by this installer. The latest firmware at the time of this release is " LastSupportedVerSTR ".\n"
-	 "The home menu has been updated and there's no matching patch, please check for updates on github." WarnOutro;
+	 "您正在运行此安装程序不支持的固件版本。 此版本发布时的最新固件是“ LastSupportedVerSTR ”。\n"
+	 "主页菜单已更新，没有匹配的补丁，请在github上查看更新." WarnOutro;
 
-static const char* WarningSDFail = WarnIntro "There was an error accessing the patches directory on your sd card, you could be affected by sd corruption (likely on exFat) or the archive bit issue." WarnOutro;
+static const char* WarningSDFail = WarnIntro "访问 sd 卡上的补丁目录时出错，您可能会受到 sd 损坏（可能在 exFat 上）或存档位问题的影响。" WarnOutro;
 
-static const char* ErrorHactool = "Couldn't detect the home menu version you're running. Hactool failed to extract the home menu version info. Please open an issue on github.";
+static const char* ErrorHactool = "无法检测到您正在运行的主菜单版本。 Hactool 无法提取主菜单版本信息。 请在github上打开一个问题。";
 
 const char* PatchMng::InstallWarnStr = 
-	"The theme you're trying to install is known to crash without an home menu patch and you don't seem to have a compatible one installed,"
-	"it may work but it's possible that it will crash on boot. Do you want to continue ?\n\n"
-	"In case of crash on boot you can delete the theme by manually removing the 0100000000001000 folder from /atmosphere/contents on your sd card (/<your cfw>/titles for old atmosphere and other CFWs)";
+	"众所周知，您尝试安装的主题在没有主菜单补丁的情况下会崩溃，而且您似乎没有安装兼容的主题，"
+	"它可能会工作，但它可能会在启动时崩溃。 你想继续吗？\n\n"
+	"如果启动时崩溃，您可以通过从 SD 卡上的 /atmosphere/contents 手动删除 0100000000001000 文件夹来删除主题（/<your cfw>/titles 表示旧的氛围和其他 CFW）";
 
 static const unordered_map<string, SystemVersion> PartsRequiringPatch = 
 {
