@@ -330,6 +330,7 @@ static void SetupSysVer()
 int main(int argc, char **argv)
 {
 	PlatformInit();
+    plInitialize(PlServiceType_User);
 
 	if (!GFX::Init())
 	{
@@ -415,6 +416,7 @@ int main(int argc, char **argv)
 	GFX::Exit();
 	Image::Internal::AssertOnLeaks();
 	PlatformExit();
-	
+	plExit();
+
     return 0;
 }
