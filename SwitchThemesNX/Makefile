@@ -51,7 +51,6 @@ ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 CFLAGS	:=	-O2 -ffunction-sections \
 			$(ARCH) $(DEFINES)
 
-
 CFLAGS	+=	$(INCLUDE) -D__SWITCH__ -Wall  -DGITVER=\"$(GITVER)\" #-Werror
 
 ifneq ($(DEVBUILD),)         
