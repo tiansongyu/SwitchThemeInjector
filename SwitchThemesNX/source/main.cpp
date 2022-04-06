@@ -203,7 +203,7 @@ class QuitPage : public IPage
 	public:
 		QuitPage()
 		{
-			Name = "Quit";
+			Name = "退出";
 		}	
 		
 		void Render(int X, int Y) override {}
@@ -217,22 +217,22 @@ class QuitPage : public IPage
 void ShowFirstTimeHelp(bool WelcomeScr)
 {	
 	if (WelcomeScr)
-		DialogBlocking("Welcome to NXThemes Installer " + Version::Name + "!\n\nThese pages contains some important informations, it's recommended to read them carefully.\nThis will only show up once, you can read it again from the Credits tab.");
+		DialogBlocking("欢迎使用 NXThemes 安装程序" + Version::Name + "!\n\n这些页面包含一些重要信息，建议仔细阅读。\n这只会显示一次，您可以从“信用”选项卡再次阅读。");
 
 	DialogBlocking(
-		"Custom themes CANNOT brick your console because they're installed only on the SDcard. \n"
-		"If after installing a theme your console doesn't boot anymore manually delete the '0100000000001000' and '0100000000001013' folders in 'SDcard/<your cfw folder>/contents (/titles on reinx and sxos)'.\n\n"
-		"When you change the firmware your console (upgrade or downgrade) you must uninstall the theme first because the installed files on the sd are firmware-dependent.\n"
-		"If the firmware you installed supports themes you can install them back after the update.\n\n"
-		"Lockscreen themes after firmware version 9.0 are not supported on all CFWs because some lack support for patching titles via IPS."
+		"自定义主题不能占用您的控制台，因为它们仅安装在 SD 卡上。\n"
+		"如果在安装主题后您的控制台不再启动，请手动删除“SDcard/<your cfw folder>/contents (/titles on reinx and sxos)”中的“0100000000001000”和“0100000000001013”文件夹。\n\n"
+		"当您更改控制台固件（升级或降级）时，您必须先卸载主题，因为 sd 上安装的文件依赖于固件。\n"
+		"如果您安装的固件支持主题，您可以在更新后重新安装它们。.\n\n"
+		"并非所有 CFW 都支持固件版本 9.0 之后的锁屏主题，因为有些不支持通过 IPS 修补标题."
 	);
 
 	DialogBlocking(
-		"You can find some themes on the /r/NXThemes subreddit and in the Qcean Discord server (invite: CUnHJgb) where you can also ask for support. \n\n"
-		"To make your own themes download the windows app at: https://git.io/fpxAS\n"
-		"Or use the online theme editor at: https://exelix11.github.io/SwitchThemeInjector/v2\n"
+		"您可以在 /r/NXThemes subreddit 和 Qcean Discord 服务器（邀请：CUnHJgb）中找到一些主题，您也可以在那里寻求支持。\n\n"
+		"要制作自己的主题，请在以下位置下载 Windows 应用程序：https://git.io/fpxAS\n"
+		"或使用在线主题编辑器：https://exelix11.github.io/SwitchThemeInjector/v2\n"
 		"\n"
-		"That's all, have fun with custom themes :)"
+		"就是这样，享受自定义主题的乐趣:)"
 	);
 }
 
@@ -331,7 +331,6 @@ static void SetupSysVer()
 int main(int argc, char **argv)
 {
 	PlatformInit();
-    plInitialize(PlServiceType_User);
 
 	if (!GFX::Init())
 	{
@@ -341,13 +340,19 @@ int main(int argc, char **argv)
 	PlatformAfterInit();
 
 	SetupSysVer();
-	DisplayLoading("Loading system info...");
+	DisplayLoading("加载系统信息...");
 
 	bool ThemesFolderExists = fs::EnsureThemesFolderExists();
 	NcaDumpPage::CheckHomeMenuVer();
 	SetCfwFolder();
 
 	PatchMng::Init();
+	auto PatchErrorMsg = PatchMng::EnsureInstalled();
+	if (!PatchErrorMsg && UseLowMemory) // if patches are fine, check if applet mode
+	{
+		PatchErrorMsg.Title = "警告";
+		PatchErrorMsg.Content = "您正在小程序模式下运行，当从相册启动自制软件时，可用内存较少。\n\n此应用程序应该可以正常工作，但如果您遇到崩溃，请尝试通过从主菜单打开游戏并按 R 来启动游戏 同一时间。";
+	}
 
 	if (envHasArgv() && argc > 1)
 	{
@@ -411,7 +416,6 @@ int main(int argc, char **argv)
 	GFX::Exit();
 	Image::Internal::AssertOnLeaks();
 	PlatformExit();
-	plExit();
-
+	
     return 0;
 }

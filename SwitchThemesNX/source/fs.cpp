@@ -4,8 +4,8 @@
 #include <sstream>
 
 #define FS_TROUBLESHOOT_MSG \
-	"Make sure the file exists, this can also be caused by sd corruption with exfat or the archive bit, especially if you used this sd card with a mac.\n" \
-	"Try removing the archive bit from the themes folder on a windows pc or with hekate, alternatively delete themes folder and copy the files via FTP"
+	"确保该文件存在，这也可能是由于 exfat 或存档位导致 sd 损坏造成的，特别是如果您将此 sd 卡与 mac 一起使用。\n" \
+	"尝试从 windows pc 或 hekate 上的主题文件夹中删除存档位，或者删除主题文件夹并通过 FTP 复制文件"
 
 using namespace std;
 using namespace fs;

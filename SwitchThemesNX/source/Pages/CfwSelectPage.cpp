@@ -16,23 +16,23 @@ static const int XCursorBtn = SCR_W / 2 - BtnWidth / 2;
 
 void CfwSelectPage::Render(int X, int Y)
 {
-	Utils::ImGuiSetupPageFullscreen("CfwSelectPage", 10, 10);
+	Utils::ImGuiSetupPageFullscreen("选择页面", 10, 10);
 	ImGui::SetWindowFocus();
 
 	if (Folders.size() == 0)
 	{
 		ImGui::PushFont(font30);
-		Utils::ImGuiCenterString("Couldn't find any cfw folder.");
+		Utils::ImGuiCenterString("找不到任何 cfw 文件夹.");
 		ImGui::PopFont();
 		ImGui::NewLine();
 		ImGui::TextWrapped(
-			"Make sure you have either the \"atmosphere\", \"reinx\" or \"sxos\" folder in the root of your sd card.\n\n"
-			"Some cfws don't create this folder automatically so you should do it manually.\n"
-			"If you do have the cfw folder but still see this screen make sure it's written correctly, without spaces and all lowercase.");
+			"确保您的 SD 卡根目录中有 \"atmosphere\"、\"reinx\" 或 \"sxos\" 文件夹。\n\n"
+			"某些 cfw 不会自动创建此文件夹，因此您应该手动创建。\n"
+			"如果您确实有 cfw 文件夹但仍然看到此屏幕，请确保它写入正确，没有空格和全部小写。");
 		
 	}	
 	else {
-		Utils::ImGuiCenterString("Multiple cfw folders detected, which one do you want to use ?");
+		Utils::ImGuiCenterString("检测到多个 cfw 文件夹，您想使用哪个？");
 
 		ImGui::PushFont(font30);
 		ImGui::SetCursorPos({ (float)XCursorBtn, ImGui::GetCursorPosY() + 30 });
@@ -53,8 +53,8 @@ void CfwSelectPage::Render(int X, int Y)
 	}
 
 	ImGui::NewLine();
-	Utils::ImGuiCenterString("if your cfw isn't supported open an issue on Github.");
-	if (Utils::ImGuiCenterButton("Close this application"))
+	Utils::ImGuiCenterString("如果您的 cfw 不受支持，请在 Github 上提出问题。");
+	if (Utils::ImGuiCenterButton("关闭此应用程序"))
 		App::Quit();
 
 	Utils::ImGuiSetWindowScrollable();

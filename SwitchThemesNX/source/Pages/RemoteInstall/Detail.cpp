@@ -18,7 +18,7 @@ void RemoteInstall::DetailPage::Render(int X, int Y)
 	ImGui::PushFont(font25);
 
 	Utils::ImGuiNextFullScreen();
-	ImGui::Begin("InstallDetail", nullptr, DefaultWinFlags);
+	ImGui::Begin("安装详情", nullptr, DefaultWinFlags);
 	ImGui::SetCursorPosY(20);
 	Utils::ImGuiCenterString(entry.Name);
 	Utils::ImGuiCenterString(PartName);
@@ -30,21 +30,21 @@ void RemoteInstall::DetailPage::Render(int X, int Y)
 	const float BtnW = SCR_W / 3.0f;
 
 	ImGui::SetCursorPosX(SCR_W / 2 - BtnW / 2);
-	if (ImGui::Button("Install", ImVec2(BtnW, 0)))
+	if (ImGui::Button("安装", ImVec2(BtnW, 0)))
 		UserDownload(Action::DownloadInstall);
 	Utils::ImGuiSelectItemOnce();
 	
 	ImGui::SetCursorPosX(SCR_W / 2 - BtnW / 2);
-	if (ImGui::Button("Install but don't save to the SD card", ImVec2(BtnW, 0)))
+	if (ImGui::Button("安装但不保存到 SD 卡", ImVec2(BtnW, 0)))
 		UserDownload(Action::Install);
 	
 	ImGui::SetCursorPosX(SCR_W / 2 - BtnW / 2);
-	if (ImGui::Button("Just download", ImVec2(BtnW, 0)))
+	if (ImGui::Button("只需下载", ImVec2(BtnW, 0)))
 		UserDownload(Action::Download);
 	
 	ImGui::NewLine();
 	ImGui::SetCursorPosX(SCR_W / 2 - BtnW / 2);
-	if (ImGui::Button("Cancel", ImVec2(BtnW, 0)))
+	if (ImGui::Button("取消", ImVec2(BtnW, 0)))
 		PopPage(this);
 
 	ImGui::End();
@@ -66,7 +66,7 @@ void RemoteInstall::DetailPage::UserDownload(Action action)
 		auto entry = ThemeEntry::FromSZS(theme);
 		if (!entry->CanInstall())
 		{
-			DialogBlocking("This theme is not valid");
+			DialogBlocking("此主题无效");
 			return;
 		}
 

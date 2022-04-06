@@ -27,9 +27,9 @@ void RemoteInstall::ListPage::Render(int X, int Y)
 	ImGui::PushFont(font25);
 
 	Utils::ImGuiNextFullScreen();
-	ImGui::Begin("InstallList", nullptr, DefaultWinFlags);
+	ImGui::Begin("安装列表", nullptr, DefaultWinFlags);
 	ImGui::SetCursorPosY(20);
-	Utils::ImGuiCenterString("This link contains multiple themes, select which ones you want to download.");
+	Utils::ImGuiCenterString("此链接包含多个主题，选择您要下载的主题。");
 	
 	ImGui::Separator();
 
@@ -59,10 +59,10 @@ void RemoteInstall::ListPage::Render(int X, int Y)
 	ImGui::Spacing();
 
 	ImGui::SetCursorPosX(15);
-	if (ImGui::Button("Select none"))
+	if (ImGui::Button("全不选"))
 		ApplySelection(false);
 	ImGui::SameLine();
-	if (ImGui::Button("Select all"))
+	if (ImGui::Button("全选"))
 		ApplySelection(true);
 
 	//From https://github.com/ocornut/imgui/issues/934#issuecomment-340231002
@@ -156,12 +156,12 @@ void RemoteInstall::ListPage::DownloadClicked()
 
 			if (folderName == "")
 			{
-				DialogBlocking("Couldn't create a folder on the SD card to download");
+				DialogBlocking("无法在 SD 卡上创建文件夹进行下载");
 				return;
 			}
 
 			if (fs::Exists(folderName)) {
-				if (!YesNoPage::Ask("The themes will be downloaded to `" + folderName + "` but this folder already exists, existing files will be overwritten.\nDo you want to continue ?"))
+				if (!YesNoPage::Ask("主题将被下载到 `" + folderName + "` but this folder already exists, existing files will be overwritten.\nDo you want to continue ?"))
 					return;
 			
 				if (!std::filesystem::is_directory(folderName))
@@ -208,7 +208,7 @@ void RemoteInstall::ListPage::DownloadClicked()
 				ThemesPage::Instance->SelectElementOnRescan(OutFirstFilaName);
 
 			if (numFailed != urls.size())
-				DialogBlocking("Themes have been downloaded to your sd card, you can install them from the Themes page in the main menu");
+				DialogBlocking("主题已下载到您的 SD 卡，您可以从主菜单中的主题页面安装它们");
 
 			PopPage(this);
 		});

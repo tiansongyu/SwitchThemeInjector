@@ -7,59 +7,39 @@
 
 using namespace GFX;
 
-GLFWwindow *GFX::mainWindow = nullptr;
+GLFWwindow* GFX::mainWindow = nullptr;
 float GFX::WRatio, GFX::HRatio;
 
-static void windowFramebufferSizeCallback(GLFWwindow *window, int width, int height)
+static void windowFramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	if (!width || !height)
 		return;
 
 	WRatio = (float)width / SCR_W;
 	HRatio = (float)height / SCR_H;
-	ImGui::GetIO().DisplayFramebufferScale = {WRatio, HRatio};
+	ImGui::GetIO().DisplayFramebufferScale = { WRatio, HRatio };
 	LOGf("fbuf scaled to %dx%d, new ratios %f %f\n", width, height, WRatio, HRatio);
 }
 
-ImFont *font25;
-ImFont *font30;
-ImFont *font40;
+ImFont* font25;
+ImFont* font30;
+ImFont* font40;
 
 #include "../fs.hpp"
 static bool ImguiInit()
 {
 	ImGui::CreateContext();
-	ImGuiIO &io = ImGui::GetIO();
-	io.DisplaySize = ImVec2{SCR_W, SCR_H};
-    PlFontData standard, extended, chinese, korean;
-    static ImWchar extended_range[] = {0xe000, 0xe152};
-	if (R_SUCCEEDED(plGetSharedFontByType(&standard, PlSharedFontType_Standard)) &&
-		R_SUCCEEDED(plGetSharedFontByType(&extended, PlSharedFontType_NintendoExt)) &&
-		R_SUCCEEDED(plGetSharedFontByType(&chinese, PlSharedFontType_ChineseSimplified)))
-	{
-		std::uint8_t *px;
-		int w, h, bpp;
-		ImFontConfig font_cfg;
-
-		font_cfg.FontDataOwnedByAtlas = false;
-		io.Fonts->AddFontFromMemoryTTF(standard.address, standard.size, 30.0f, &font_cfg, io.Fonts->GetGlyphRangesDefault());
-		font_cfg.MergeMode = true;
-		io.Fonts->AddFontFromMemoryTTF(extended.address, extended.size, 30.0f, &font_cfg, extended_range);
-		font25 = io.Fonts->AddFontFromMemoryTTF(chinese.address, chinese.size, 30.0f, &font_cfg, io.Fonts->GetGlyphRangesChineseFull());
-		font30 = font25;
-		font40 = font30;
-
-		// build font atlas
-		io.Fonts->GetTexDataAsAlpha8(&px, &w, &h, &bpp);
-		io.Fonts->Flags |= ImFontAtlasFlags_NoPowerOfTwoHeight;
-		io.Fonts->Build();
-	}
+	ImGuiIO& io = ImGui::GetIO();
+	io.DisplaySize = ImVec2{ SCR_W, SCR_H};
+	font25 = io.Fonts->AddFontFromFileTTF(ASSET("opensans.ttf"), 30.0f,NULL,io.Fonts->GetGlyphRangesChineseFull());
+	font30 =	font25;
+	font40 =	font25;
 
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 	io.ConfigFlags |= ImGuiConfigFlags_IsTouchScreen;
 
 	//Auto generated
-	ImVec4 *colors = ImGui::GetStyle().Colors;
+	ImVec4* colors = ImGui::GetStyle().Colors;
 	colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
 	colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
 	colors[ImGuiCol_WindowBg] = ImVec4(0.18f, 0.18f, 0.18f, 1.0f);
@@ -74,7 +54,7 @@ static bool ImguiInit()
 	colors[ImGuiCol_TitleBgActive] = ImVec4(0.16f, 0.29f, 0.48f, 1.00f);
 	colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 0.51f);
 	colors[ImGuiCol_MenuBarBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-	colors[ImGuiCol_ScrollbarBg] = ImVec4(0, 0, 0, 0);
+	colors[ImGuiCol_ScrollbarBg] = ImVec4(0,0,0,0);
 	colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
 	colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.41f, 0.41f, 0.41f, 1.00f);
 	colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.51f, 0.51f, 0.51f, 1.00f);
@@ -109,11 +89,11 @@ static bool ImguiInit()
 	colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
 	colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
 
-	ImGuiStyle &style = ImGui::GetStyle();
+	ImGuiStyle& style = ImGui::GetStyle();
 	style.FrameRounding = 0;
 	style.WindowRounding = 0;
 	style.WindowRounding = 0;
-	style.ItemSpacing = {15, 10};
+	style.ItemSpacing = { 15,10 };
 	style.ScrollbarRounding = 8;
 	style.ScrollbarSize = 8;
 
@@ -180,10 +160,9 @@ bool GFX::Init()
 	if (res)
 	{
 		glfwSetFramebufferSizeCallback(mainWindow, windowFramebufferSizeCallback);
-		windowFramebufferSizeCallback(mainWindow, SCR_W, SCR_H);
+		windowFramebufferSizeCallback(mainWindow, SCR_W,SCR_H);
 	}
-	else
-		GFX::Exit();
+	else GFX::Exit();
 
 	return res;
 }
@@ -204,7 +183,7 @@ bool App::MainLoop()
 	return true;
 }
 
-void App::Quit()
+void App::Quit() 
 {
 	glfwSetWindowShouldClose(mainWindow, GLFW_TRUE);
 }

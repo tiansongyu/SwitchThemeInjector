@@ -52,7 +52,7 @@ protected:
 			}
 			catch (std::runtime_error& err)
 			{
-				DialogBlocking("Error while extracting the requested title: " + std::string(err.what()));
+				DialogBlocking("提取请求的标题时出错：" + std::string(err.what()));
 				return false;
 			}
 
@@ -124,7 +124,7 @@ protected:
 		{
 			if (patch.FirmName == "")
 			{
-				DialogBlocking("Couldn't find any patch for " + BaseSzs + "\nThe theme was not installed");
+				DialogBlocking("找不到任何补丁" + BaseSzs + "\nThe theme was not installed");
 				return false;
 			}
 			if (NxThemeGetBgImage().size() != 0)
@@ -171,14 +171,14 @@ if (SData.files.count("layout.json"))\
 								pResult = Patcher.PatchAppletIcon(dds, p.NxThemeName);
 							else
 							{
-								DialogBlocking("Couldn't load the icon image for " + p.NxThemeName);
+								DialogBlocking("无法加载图标图像" + p.NxThemeName);
 								continue;
 							}
 						}
 						else continue;
 
 						if (!pResult)
-							DialogBlocking(p.NxThemeName + " icon patch failed for " + SzsName + "\nThe theme will be installed anyway but may crash.");
+							DialogBlocking(p.NxThemeName + " 图标补丁失败 " + SzsName + "\n无论如何都会安装主题，但可能会崩溃。");
 						else
 							FileHasBeenPatched = true;
 					}
@@ -191,7 +191,7 @@ if (SData.files.count("layout.json"))\
 				{
 					FileHasBeenPatched = true;
 					if (!Patcher.PatchBntxTexture(SData.files["album.dds"], "RdtIcoPvr_00^s", 0x02000000))
-						DialogBlocking("Album icon patch failed for " + SzsName + "\nThe theme will be installed anyway but may crash.");
+						DialogBlocking("相册图标补丁失败 " + SzsName + "\n无论如何都会安装主题，但可能会崩溃。");
 				}
 			}
 		}
@@ -217,7 +217,7 @@ if (SData.files.count("layout.json"))\
 		if (!Preview)
 		{
 			_HasPreview = false;
-			DialogBlocking("Failed to load the preview image");
+			DialogBlocking("无法加载预览图片");
 		}
 		return Preview;
 	}
@@ -269,8 +269,8 @@ private:
 		NXThemeVer = themeInfo.Version;
 		if (themeInfo.Version > SwitchThemesCommon::NXThemeVer)
 		{
-			lblLine2 = "New version, update the installer !";
-			InstallFailReason = "This theme requres a newer version of the theme installer. Download latest version from GitHub.";
+			lblLine2 = "新版本，更新安装程序!";
+			InstallFailReason = "此主题需要更新版本的主题安装程序。 从 GitHub 下载最新版本。";
 			_CanInstall = false;
 		}
 		if (_CanInstall) {
@@ -287,7 +287,7 @@ private:
 		{
 			std::string targetStr = ThemeTargetToName[themeInfo.Target];
 			if (_HasPreview)
-				targetStr += " - press X for preview";
+				targetStr += " - 按 X 预览";
 			lblLine2 = (targetStr);
 		}
 
@@ -310,7 +310,7 @@ private:
 	{
 		if (!Patcher.PatchMainBG(data))
 		{
-			DialogBlocking("PatchBntx failed for " + SzsName + "\nThe theme was not installed");
+			DialogBlocking("PatchBntx 失败" + SzsName + "\n主题未安装");
 			return false;
 		}
 		return true;
@@ -321,12 +321,12 @@ private:
 		auto patch = Patches::LoadLayout(JSON);
 		if (!patch.IsCompatible(Patcher.GetSarc()))
 		{
-			DialogBlocking("The provided layout is not compatible with " + PartName + "\nThe theme was not installed");
+			DialogBlocking("提供的布局与" + PartName + "\n主题未安装");
 			return false;
 		}
 		if (!Patcher.PatchLayouts(patch, PartName))
 		{
-			DialogBlocking("PatchLayouts failed for " + PartName + "\nThe theme was not installed");
+			DialogBlocking("PatchLayouts 失败 " + PartName + "\n主题未安装");
 			return false;
 		}
 		return true;
@@ -334,8 +334,8 @@ private:
 
 	static void MissingFileErrorDialog(const std::string& name)
 	{
-		DialogBlocking("Can't install this theme because the original " + name + " is missing from systemData.\n"
-			"To install theme packs (.nxtheme files) you need to dump the home menu romfs following the guide in the \"Extract home menu\" tab");
+		DialogBlocking("无法安装此主题，因为原始 " + name + " is missing from systemData.\n"
+			"要安装主题包（.nxtheme 文件），您需要按照 \"Extract home menu\" 选项卡中的指南转储主菜单 romfs");
 	}
 
 	static inline bool SarcOpen(const std::string& path, SARC::SarcData* out)

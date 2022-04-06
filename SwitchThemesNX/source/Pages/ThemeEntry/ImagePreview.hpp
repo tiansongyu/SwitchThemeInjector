@@ -10,7 +10,7 @@ class ImagePreview : public IUIControlObj
 		void Render(int X, int Y) override
 		{
 			Utils::ImGuiNextFullScreen();
-			ImGui::Begin("ImagePreview", nullptr, DefaultWinFlags);
+			ImGui::Begin("图像预览", nullptr, DefaultWinFlags);
 			
 			ImGui::Image((ImTextureID)(uintptr_t)img, { SCR_W, SCR_H });
 

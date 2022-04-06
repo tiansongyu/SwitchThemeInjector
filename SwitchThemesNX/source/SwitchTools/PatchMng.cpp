@@ -31,9 +31,9 @@ namespace {
 	}
 
 	const char* InstallWarnStr =
-		"The theme you're trying to install is known to crash without an home menu patch and you don't seem to have a compatible one installed,"
-		"it may work but it's possible that it will crash on boot. Do you want to continue ?\n\n"
-		"In case of crash on boot you can delete the theme by manually removing the 0100000000001000 folder from /atmosphere/contents on your sd card (/<your cfw>/titles for old atmosphere and other CFWs)";
+"众所周知，您尝试安装的主题在没有主菜单补丁的情况下会崩溃，而且您似乎没有安装兼容的主题，"
+	"它可能会工作，但它可能会在启动时崩溃。 你想继续吗？\n\n"
+	"如果启动时崩溃，您可以通过从 SD 卡上的 /atmosphere/contents 手动删除 0100000000001000 文件夹来删除主题（/<your cfw>/titles 表示旧的氛围和其他 CFW）";
 
 }; 
 
@@ -53,6 +53,7 @@ bool PatchMng::Init() {
 }
 
 const std::string& PatchMng::QlaunchBuildId()
+
 {
 	return qlaunchBuildID;
 }
